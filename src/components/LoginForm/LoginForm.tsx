@@ -14,7 +14,7 @@ export const LoginForm: FC = () => {
 
   return (
     <>
-      <h3>Auth</h3>
+      <h3>Auth 4</h3>
       <form onSubmit={submitHandler}>
         <input
           name='email'
