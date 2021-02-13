@@ -1,12 +1,17 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 // layouts
-import AuthLayout from './layouts/AuthLayout/AuthLayout'
-import ChatLayout from './layouts/ChatLayout/ChatLayout'
-import ProtectedRoute from './utils/ProtectedRoute/ProtectedRoute'
+import { AuthLayout } from './layouts/AuthLayout/AuthLayout'
+import { ChatLayout } from './layouts/ChatLayout/ChatLayout'
+import { authService } from './store/services/authenticationService'
+import { ProtectedRoute } from './utils/ProtectedRoute/ProtectedRoute'
 
-const App: FC = () => {
+export const App: FC = () => {
+  useEffect(() => {
+    authService.verifyCurrentUser()
+  }, [])
+
   return (
     <>
       <Switch>
@@ -16,5 +21,3 @@ const App: FC = () => {
     </>
   )
 }
-
-export default App

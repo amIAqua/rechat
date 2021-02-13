@@ -1,11 +1,10 @@
 import { FC } from 'react'
+import { LoginForm } from '../../components/LoginForm/LoginForm'
 
-const AuthLayout: FC = () => {
+export const AuthLayout: FC = () => {
   return (
     <>
-      <h3>Auth</h3>
+      <LoginForm />
     </>
   )
 }
-
-export default AuthLayout

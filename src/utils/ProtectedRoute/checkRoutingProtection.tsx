@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import authService from '../../store/services/authService'
+import { authService } from '../../store/services/authenticationService'
 
 export type ProtectedRouteProps = {
   component: FC

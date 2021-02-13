@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-const ChatWindow: FC = () => {
+export const ChatWindow: FC = () => {
   return (
     <>
       <div className='chat-window'>
@@ -9,5 +9,3 @@ const ChatWindow: FC = () => {
     </>
   )
 }
-
-export default ChatWindow

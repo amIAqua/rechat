@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { Container, Grid } from '@material-ui/core'
 
 // components
-import DialogsWindow from '../../components/DialogsWindow/DialogsWindow'
-import ChatWindow from '../../components/ChatWindow/ChatWindow'
+import { DialogsWindow } from '../../components/DialogsWindow/DialogsWindow'
+import { ChatWindow } from '../../components/ChatWindow/ChatWindow'
 
-const ChatLayout: FC = () => {
+export const ChatLayout: FC = () => {
   return (
     <>
       <Container maxWidth='lg' className='chat-layout-container'>
@@ -21,5 +21,3 @@ const ChatLayout: FC = () => {
     </>
   )
 }
-
-export default ChatLayout
