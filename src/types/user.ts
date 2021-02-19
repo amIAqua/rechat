@@ -1,11 +1,23 @@
-type Dialog = {
+export type Dialog = {
   companion: string
-  message: string
+  messages: [string]
 }
 
 export interface IUser {
-  email: string
+  token: string
   name: string
-  surname: string
   dialogs: Dialog[]
+  _id: string
+}
+
+export interface IDecodedUser {
+  user: {
+    name: string
+    password: string
+    token: string
+    dialogs: Dialog[]
+    _id: string
+  }
+  exp: number
+  iat: number
 }

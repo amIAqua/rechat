@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Card, CardContent, Typography } from '@material-ui/core'
+import { userService } from '../../store/services/userService'
 
 export const UserCard: FC = () => {
   return (
@@ -10,7 +11,7 @@ export const UserCard: FC = () => {
       >
         <CardContent>
           <Typography color='textSecondary' gutterBottom>
-            Word of the Day
+            {userService.user!.name}
           </Typography>
         </CardContent>
       </Card>

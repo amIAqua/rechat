@@ -1,12 +1,14 @@
-import { action, computed, makeObservable, observable } from 'mobx'
+import { action, computed, makeAutoObservable, observable } from 'mobx'
 import Cookies from 'js-cookie'
 import { authAPI } from '../api/auth-api'
+import { userService } from './userService'
+import { IDecodedUser } from '../../types/user'
 
 class authenticationService {
   @observable _isUserAuthenticated: boolean = false
 
   constructor() {
-    makeObservable(this)
+    makeAutoObservable(this)
   }
 
   // field getters
@@ -32,7 +34,7 @@ class authenticationService {
   }
 
   @action
-  setUserWithTokenToken(token: string) {
+  setUserToken(token: string) {
     Cookies.set('idtoken', token)
   }
 
@@ -46,14 +48,16 @@ class authenticationService {
       const token = this.getUserTokenFromCookie()
 
       if (token) {
-        const sessionSuggestion = await authAPI.verifyUserToken(token)
-        console.log(sessionSuggestion)
+        const sessionSuggestion: IDecodedUser = await authAPI.verifyUserToken(
+          token
+        )
 
         if (!sessionSuggestion) {
           this.removeUserToken()
           this.removeAuthenticationStatus()
         }
 
+        userService.setUser(sessionSuggestion.user)
         this.setAuthenticationStatus()
       }
     } catch (error) {
@@ -64,9 +68,14 @@ class authenticationService {
   @action
   async login(email: string, password: string) {
     try {
-      const token = await authAPI.login(email, password)
+      const user = await authAPI.login(email, password)
 
-      this.setUserWithTokenToken(token)
+      if (!user || !user.token) {
+        return
+      }
+
+      userService.setUser(user)
+      this.setUserToken(user.token)
     } catch (error) {
       throw new Error(error)
     }

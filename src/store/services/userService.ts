@@ -1,11 +1,13 @@
-import { action, computed, makeObservable, observable } from 'mobx'
-import { IUser } from '../../types/user'
+import { action, computed, makeAutoObservable, observable, toJS } from 'mobx'
+import { IUser, Dialog } from '../../types/user'
+import { userAPI } from '../api/user-api'
 
 class UserService {
-  @observable _user: IUser | {} = {}
+  @observable _user: IUser | null = null
+  @observable _userDialogs: Dialog[] | [] = []
 
   constructor() {
-    makeObservable(this)
+    makeAutoObservable(this)
   }
 
   // field getters
@@ -14,9 +16,30 @@ class UserService {
     return this._user
   }
 
+  @computed
+  get userDialogs() {
+    return toJS(this._userDialogs)
+  }
+
   @action
   setUser(user: IUser) {
     this._user = user
+  }
+
+  @action
+  setUserDialogs(userDialogs: Dialog[]) {
+    this._userDialogs = userDialogs
+  }
+
+  @action
+  async getUserDialogs(_id: string) {
+    try {
+      const userDialogs = await userAPI.getUserDialogs(_id)
+
+      console.log(userDialogs)
+
+      this.setUserDialogs(userDialogs)
+    } catch (error) {}
   }
 }
 
