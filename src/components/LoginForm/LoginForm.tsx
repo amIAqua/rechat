@@ -1,15 +1,15 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { authService } from '../../store/services/authenticationService'
 
 export const LoginForm: FC = () => {
-  const [email, setEmail] = useState('')
+  const [nickname, setNickname] = useState('')
   const [password, setPassword] = useState('')
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    authService.login(email, password)
+    authService.login(nickname, password)
   }
 
   return (
@@ -17,9 +17,9 @@ export const LoginForm: FC = () => {
       <h3>Auth 4</h3>
       <form onSubmit={submitHandler}>
         <input
-          name='email'
+          name='nickname'
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setEmail(event.target.value)
+            setNickname(event.target.value)
           }
         ></input>
         <input

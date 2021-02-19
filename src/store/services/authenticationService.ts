@@ -1,7 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx'
-import { auth } from '../firebaseConnection'
-import admin from 'firebase-admin'
 import Cookies from 'js-cookie'
+import { authAPI } from '../api/auth-api'
 
 class authenticationService {
   @observable _isUserAuthenticated: boolean = false
@@ -33,51 +32,52 @@ class authenticationService {
   }
 
   @action
-  async verifyCurrentUser() {
-    const token = this.getUserTokenFromCookie()
+  setUserWithTokenToken(token: string) {
+    Cookies.set('idtoken', token)
+  }
 
-    if (token) this.decodeUserToken(token)
+  removeUserToken() {
+    Cookies.remove('idtoken')
   }
 
   @action
-  async decodeUserToken(token: string) {
-    const decodedToken = await admin.auth().verifyIdToken(token)
-    console.log(decodedToken.uid)
+  async verifyCurrentUser() {
+    try {
+      const token = this.getUserTokenFromCookie()
+
+      if (token) {
+        const sessionSuggestion = await authAPI.verifyUserToken(token)
+        console.log(sessionSuggestion)
+
+        if (!sessionSuggestion) {
+          this.removeUserToken()
+          this.removeAuthenticationStatus()
+        }
+
+        this.setAuthenticationStatus()
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   @action
   async login(email: string, password: string) {
     try {
-      await auth.signInWithEmailAndPassword(email, password)
+      const token = await authAPI.login(email, password)
+
+      this.setUserWithTokenToken(token)
     } catch (error) {
       throw new Error(error)
     }
 
-    const token = await this.getCurrentUserToken()
-
-    if (token) {
-      this.setUserToken(token)
-    }
+    this.setAuthenticationStatus()
   }
 
   @action
-  async getCurrentUserToken() {
-    const user = await auth.currentUser?.getIdTokenResult()
-
-    if (user) return user.token
-  }
-
-  @action
-  setUserToken(token: string) {
-    Cookies.set('idtoken', token)
-  }
-
-  @action
-  async logout() {
+  logout() {
     try {
-      console.log('logout')
-
-      await auth.signOut()
+      this.removeUserToken()
     } catch (error) {
       throw new Error(error)
     }
