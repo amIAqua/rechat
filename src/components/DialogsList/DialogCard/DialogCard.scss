@@ -1,5 +1,40 @@
 .dialog-card {
-  height: 55px;
-  margin-top: 5px;
-  border: 1px solid red;
+  border-bottom: 1px solid #ccc;
+
+  :hover {
+    background: darken(#f2f2ff, 5%);
+    cursor: pointer;
+  }
+}
+
+.avatar-companion {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-left: 1.1rem;
+}
+
+.dialog-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  h4 {
+    padding: 0;
+    margin: 0;
+    color: #6369ff;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.time-unread {
+  padding-left: 5rem;
 }

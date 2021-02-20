@@ -36,8 +36,6 @@ class UserService {
     try {
       const userDialogs = await userAPI.getUserDialogs(_id)
 
-      console.log(userDialogs)
-
       this.setUserDialogs(userDialogs)
     } catch (error) {}
   }

@@ -4,7 +4,29 @@
 @import '../components/ChatWindow/ChatWindow.scss';
 @import '../components/UserCard/UserCard.scss';
 @import '../components/DialogsList/DialogCard/DialogCard.scss';
+@import '../components/DialogsList/DialogsList.scss';
 
 body {
-  font-family: Roboto;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #6369ff;
+
+  // scroll-bar
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }

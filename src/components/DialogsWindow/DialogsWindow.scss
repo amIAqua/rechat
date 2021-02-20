@@ -1,8 +1,8 @@
 @import '../../styles/colors.scss';
 
 .dialogs-window {
-  border: 5px solid $dialog-window;
-  border-radius: 15px;
-  width: 95%;
+  border-radius: 1rem 0 0 1rem;
+  width: 45%;
   height: 600px;
+  background: #f2f2ff;
 }

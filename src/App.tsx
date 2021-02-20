@@ -7,14 +7,14 @@ import { AuthLayout } from './layouts/AuthLayout/AuthLayout'
 import { ChatLayout } from './layouts/ChatLayout/ChatLayout'
 import { authService } from './store/services/authenticationService'
 import { useRedirect } from './utils/useRedirect'
+import { userService } from './store/services/userService'
 
 export const App: FC = () => {
   const { redirectTo } = useRedirect()
 
   useEffect(() => {
     authService.verifyCurrentUser()
-    redirectTo('/', 100)
-  }, [])
+  }, [userService.user])
 
   return (
     <>

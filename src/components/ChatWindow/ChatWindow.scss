@@ -1,8 +1,7 @@
 @import '../../styles/colors.scss';
 
 .chat-window {
-  border: 5px solid $chat-window;
-  border-radius: 15px;
+  border-radius: 0 1rem 1rem 0;
+  background: #fff;
   width: 100%;
-  height: 600px;
 }

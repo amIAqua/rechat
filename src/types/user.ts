@@ -1,4 +1,5 @@
 export type Dialog = {
+  dialogId: string
   companion: string
   messages: [string]
 }
