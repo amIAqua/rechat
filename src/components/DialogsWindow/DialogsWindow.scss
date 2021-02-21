@@ -6,3 +6,10 @@
   height: 600px;
   background: #f2f2ff;
 }
+
+.start-btn-container {
+  text-align: center;
+  .start-btn {
+    margin: 1rem;
+  }
+}

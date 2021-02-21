@@ -11,13 +11,13 @@ export const ChatWindow: FC = observer(() => {
       setQueryStringParams()
     }
   }, [dialogService.activeDialog])
-  return (
-    <>
-      <div className='chat-window'>
-        {dialogService.activeDialog ? (
-          <h3>{dialogService.activeDialog.companion}</h3>
-        ) : null}
-      </div>
-    </>
+
+  const renderChat = () => (
+    <div className='chat-window'>
+      {dialogService.activeDialog ? (
+        <h3>{dialogService.activeDialog.companion}</h3>
+      ) : null}
+    </div>
   )
+  return <>{renderChat()}</>
 })

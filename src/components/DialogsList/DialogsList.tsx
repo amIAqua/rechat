@@ -7,11 +7,13 @@ import { Dialog } from '../../types/user'
 export const DialogsList: FC = observer(() => {
   if (!userService.userDialogs) return null
 
-  return (
+  const dialogsList = () => (
     <div className='dialogs-list'>
       {(userService.userDialogs as Dialog[]).map((dialog: Dialog) => {
         return <DialogCard key={dialog.companion} dialog={dialog} />
       })}
     </div>
   )
+
+  return <>{dialogsList()}</>
 })
