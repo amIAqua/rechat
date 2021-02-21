@@ -9,6 +9,7 @@ export interface IUser {
   name: string
   dialogs: Dialog[]
   _id: string
+  avatarURL?: string
 }
 
 export interface IDecodedUser {

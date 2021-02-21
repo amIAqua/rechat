@@ -1,17 +1,13 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { observer } from 'mobx-react'
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardHeader,
-  Avatar,
-  IconButton,
-  CardMedia,
-} from '@material-ui/core'
+import { Card, CardContent, Typography, Icon } from '@material-ui/core'
 import { userService } from '../../store/services/userService'
+import { UserAvatar } from '../UserAvatar/UserAvatar'
+import { ModalDialog } from '../ModalDialog/ModalDialog'
 
 export const UserCard: FC = observer(() => {
+  const [modalIsVisible, setModalIsVisible] = useState(false)
+
   return (
     <>
       <Card
@@ -25,10 +21,14 @@ export const UserCard: FC = observer(() => {
       >
         {userService.user ? (
           <div className='user-info'>
-            <img
-              className='avatar'
-              src='https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop'
-            />
+            <UserAvatar />
+            <label
+              className='add-avatar-btn'
+              onClick={() => setModalIsVisible((prev) => !prev)}
+            >
+              <Icon>add_circle</Icon>
+            </label>
+
             <CardContent>
               <Typography
                 color='textSecondary'
@@ -41,6 +41,10 @@ export const UserCard: FC = observer(() => {
           </div>
         ) : null}
       </Card>
+      <ModalDialog
+        open={modalIsVisible}
+        setModalIsVisible={setModalIsVisible}
+      />
     </>
   )
 })

@@ -59,6 +59,7 @@ class authenticationService {
 
         userService.setUser(sessionSuggestion.user)
         this.setAuthenticationStatus()
+        userService.getUserAvatar()
       }
     } catch (error) {
       console.log(error)
@@ -74,8 +75,11 @@ class authenticationService {
         return
       }
 
+      console.log(user)
+
       userService.setUser(user)
       this.setUserToken(user.token)
+      userService.getUserAvatar()
     } catch (error) {
       throw new Error(error)
     }

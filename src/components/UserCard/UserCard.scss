@@ -7,6 +7,7 @@
   margin-top: 1rem;
   padding-left: 1rem;
   display: flex;
+  position: relative;
 }
 
 .avatar {
@@ -14,4 +15,15 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
+}
+
+.add-avatar-btn {
+  position: absolute;
+  right: 3;
+  color: #fff;
+  cursor: pointer;
+}
+
+input[type='file'] {
+  display: none;
 }
